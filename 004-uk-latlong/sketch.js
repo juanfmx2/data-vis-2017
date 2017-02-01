@@ -5,7 +5,7 @@ var sketch = function(p) {
     var minLat, maxLat;
 
     p.preload = function() {
-        table = p.loadTable("/data/uk24727_latlong.csv","csv","header")
+        table = p.loadTable("../data/uk24727_latlong.csv","csv","header")
     };
 
     p.setup = function() {

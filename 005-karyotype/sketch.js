@@ -114,7 +114,7 @@ var sketch = function(p) {
 
     p.preload = function() {
         data = { };
-        p.loadStrings("/data/karyotype.human.hg19.txt", parseData)
+        p.loadStrings("../data/karyotype.human.hg19.txt", parseData)
     };
 
     p.setup = function() {
