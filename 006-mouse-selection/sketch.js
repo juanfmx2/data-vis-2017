@@ -1,6 +1,7 @@
 var datapoints = [];
 var pressingMouse = false;
 var startSelectX, startSelectY, stopSelectX, stopSelectY;
+var canvasSize = 500;
 
 var DataPoint = function(x,y) {
   this.x = x;
@@ -12,14 +13,17 @@ var DataPoint = function(x,y) {
     } else {
       fill(0,0,255);
     }
+    // We draw each datapoint twice: once on the left (max x = width/2),
+    // and once on the right (x + width/2)
     ellipse(x,y,5,5);
+    ellipse(x+width/2, y, 5, 5);
   };
 };
 
 function setup() {
-    createCanvas(500, 500);
-    for ( var i = 0; i < 500; i++ ) {
-      datapoints.push(new DataPoint(random(width), random(height)));
+    createCanvas(canvasSize*2, canvasSize);
+    for ( var i = 0; i < canvasSize; i++ ) {
+      datapoints.push(new DataPoint(random(canvasSize), random(canvasSize)));
     }
     noStroke();
     noLoop();
@@ -27,14 +31,25 @@ function setup() {
 
 function draw() {
     background(255);
+    stroke(0);
+    line(width/2, 0, width/2, height);
+    noStroke();
     datapoints.forEach(function(d) {
       d.draw();
     });
 }
 
 function selectDataPointsRect(startX, startY, stopX, stopY, selectOut) {
+  if(startX > canvasSize){
+      startX -= canvasSize;
+      stopX -= canvasSize;
+  }
+  var x1 = min(startX, stopX);
+  var x2 = max(startX, stopX);
+  var y1 = min(startY, stopY);
+  var y2 = max(startY, stopY);
   datapoints.forEach(function(d) {
-    var isIn = d.x >= startX && d.x <= stopX && d.y >= startY && d.y <= stopY
+    var isIn = d.x >= x1 && d.x <= x2 && d.y >= y1 && d.y <= y2
     if ( (selectOut && !isIn) || (!selectOut && isIn)) {
       d.active = true;
     } else {
@@ -44,6 +59,9 @@ function selectDataPointsRect(startX, startY, stopX, stopY, selectOut) {
 }
 
 function selectDataPointsCirc(startX, startY, radius, selectOut) {
+  if(startX > canvasSize){
+      startX -= canvasSize;
+  }
   datapoints.forEach(function(d) {
     var isIn = dist(startX,startY,d.x,d.y) <= radius;
     if ( (selectOut && !isIn) || (!selectOut && isIn)) {
@@ -75,15 +93,10 @@ function mouseReleased() {
   stopSelectX = mouseX;
   stopSelectY = mouseY;
 
-  startX = min(startSelectX, stopSelectX);
-  stopX = max(startSelectX, stopSelectX);
-  startY = min(startSelectY, stopSelectY);
-  stopY = max(startSelectY, stopSelectY);
-
-  radius = dist(startX,startY,stopX,stopY)
+  radius = dist(startSelectX,startSelectY,stopSelectX,stopSelectY)
   if(keyIsDown(ALT))
-    selectDataPointsCirc(startX, startY, radius, keyIsDown(SHIFT));
+    selectDataPointsCirc(startSelectX, startSelectY, radius, keyIsDown(SHIFT));
   else
-    selectDataPointsRect(startX, startY, stopX, stopY, keyIsDown(SHIFT));
+    selectDataPointsRect(startSelectX, startSelectY, stopSelectX, stopSelectY, keyIsDown(SHIFT));
   redraw();
 }
