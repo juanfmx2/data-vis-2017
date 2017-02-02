@@ -80,9 +80,9 @@ var sketch = function(p) {
         p.fill(0);
         p.noStroke()
         p.textStyle(p.BOLD);
-        p.textAlign(p.LEFT,p.CENTER);
+        p.textAlign(p.RIGHT,p.CENTER);
         p.textSize(Chromosome.HEIGHT);
-        p.text(this.name,xStart,y);
+        p.text(this.name,xStart-Chromosome.HEIGHT/2,y);
     };
 
     parseData = function(rowsData) {
