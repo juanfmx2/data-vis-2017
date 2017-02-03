@@ -6,7 +6,7 @@ last_target_id = null
 
 loadCompoundCard = (chembl_id)->
   if last_compound_id != chembl_id
-    html_card = '<div style="display: inline-block"><object id="compound_card" data="http://chembl-glados.herokuapp.com/compound_report_card/'+
+    html_card = '<div style="display: inline-block"><object id="compound_card" data="https://chembl-glados.herokuapp.com/compound_report_card/'+
       chembl_id+'/embed/name_and_classification/" width="360px" height="600px"></object></div>'
     $('#compound_card').remove()
     $('body').append(html_card)
@@ -14,7 +14,7 @@ loadCompoundCard = (chembl_id)->
 
 loadTargetCard = (chembl_id)->
   if last_target_id != chembl_id
-    html_card = '<div style="display: inline-block"><object id="target_card" data="http://chembl-glados.herokuapp.com/target_report_card/'+
+    html_card = '<div style="display: inline-block"><object id="target_card" data="https://chembl-glados.herokuapp.com/target_report_card/'+
       chembl_id+'/embed/name_and_classification/" width="360px" height="600px"></object></div>'
     $('#target_card ').remove()
     $('body').append(html_card)
