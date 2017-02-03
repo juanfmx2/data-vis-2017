@@ -12,7 +12,7 @@ last_target_id = null;
 loadCompoundCard = function(chembl_id) {
   var html_card;
   if (last_compound_id !== chembl_id) {
-    html_card = '<div style="display: inline-block"><object id="compound_card" data="http://chembl-glados.herokuapp.com/compound_report_card/' + chembl_id + '/embed/name_and_classification/" width="360px" height="600px"></object></div>';
+    html_card = '<div style="display: inline-block"><object id="compound_card" data="https://chembl-glados.herokuapp.com/compound_report_card/' + chembl_id + '/embed/name_and_classification/" width="360px" height="600px"></object></div>';
     $('#compound_card').remove();
     $('body').append(html_card);
     return last_compound_id = chembl_id;
@@ -22,7 +22,7 @@ loadCompoundCard = function(chembl_id) {
 loadTargetCard = function(chembl_id) {
   var html_card;
   if (last_target_id !== chembl_id) {
-    html_card = '<div style="display: inline-block"><object id="target_card" data="http://chembl-glados.herokuapp.com/target_report_card/' + chembl_id + '/embed/name_and_classification/" width="360px" height="600px"></object></div>';
+    html_card = '<div style="display: inline-block"><object id="target_card" data="https://chembl-glados.herokuapp.com/target_report_card/' + chembl_id + '/embed/name_and_classification/" width="360px" height="600px"></object></div>';
     $('#target_card ').remove();
     $('body').append(html_card);
     return last_target_id = chembl_id;
