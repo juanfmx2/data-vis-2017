@@ -22,7 +22,7 @@ var DataPoint = function(x,y) {
 
 function setup() {
     createCanvas(canvasSize*2, canvasSize);
-    for ( var i = 0; i < 4*canvasSize; i++ ) {
+    for ( var i = 0; i < 10*canvasSize; i++ ) {
       datapoints.push(new DataPoint(random(canvasSize), random(canvasSize)));
     }
     noStroke();
