@@ -225,6 +225,7 @@ ChEMBLSketch = function(p) {
     p.background(255);
     p.image(heatmap, heatmap_x_pos, heatmap_y_pos);
     p.noFill();
+    p.strokeWeight(1);
     p.stroke(0);
     p.rect(1, 1, p.width - 2, p.height - 2);
     if (current_hoover) {
